@@ -44,6 +44,8 @@ function draw(){
 //        ellipse(pose.nose.x, pose.nose.y, 10);
     
 //    fill(200,0,0);
+        
+// here is where I created the code to place the "X" png files for placing on the face
     image(img,pose.leftEye.x, pose.leftEye.y, 80, 80);
     image(img2,pose.rightEye.x, pose.rightEye.y, 80, 80);
     image(img3,pose.leftEar.x, pose.leftEar.y, 35, 35);
