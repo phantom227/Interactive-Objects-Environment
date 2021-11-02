@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<!-- REFERENCE TAKEN FROM P5.JS-SPEECH CODE FROM GITHUB SITE -->
+<!-- Link: https://github.com/IDMNYU/p5.js-speech/blob/master/examples/02speechbox.html -->
+
+<!-- REFERENCE FOR IMAGE PLACEMENT TAKEN FROM P5 SITE -->
+<!-- Link: https://p5js.org/reference/#/p5/image -->
+
+<!-- ADJUSTED MOST OF THE POSITIONING WHICH INCLUDES THE SLIDER, THE BUTTON, & THE LABELS -->
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Week 8: Iteration 1 ~ Project 2: Assignment 3</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.5/addons/p5.dom.js"></script>
+        <script src="../lib/p5.speech.js"></script>
+        
+        <style>
+
+            /* html {
+                margin: 0px;
+            } */
+
+            @keyframes backgroundColor {
+
+                0% {
+                    color:rgb(5, 64, 141);
+                }
+
+                20% {
+                    color:rgb(66, 66, 66);
+                }
+
+                40% {
+                    color:blueviolet;
+                }
+
+                60% {
+                    color:crimson;
+                }
+
+                80% {
+                    color:darkolivegreen;
+                }
+
+                100% {
+                    color:rgb(119, 13, 13);
+                }
+
+            }
+
+            body {
+                font-family: 'Comfortaa', cursive;
+                text-align: center;
+                font-size: 28px;
+                animation: backgroundColor 5s infinite;
+                /* background-color: rgb(224, 224, 224); */
+
+            }
+
+
+        </style>
+
+
+        <script>
+
+            let img;  //image wasn't included in the original code
+            
+            var myVoice = new p5.Speech();
+
+            var menuLoaded = 0;
+            var label, input, speakbutton, vslider, rslider, pslider; //UI
+
+            function preload() {
+
+                img = loadImage('assets/logo.png');
+
+            }
+
+            function setup() {
+
+                image(img, 10, 20, 40, 40);
+
+                // input dialogue
+
+                input = createInput("welcome to iteration 1!");
+                input.style("width", 400);
+                input.position(675, 85);
+
+                // GOT RID OF THE CHECKBOX! DIDN'T SERVE ANY PURPOSE
+
+                // checkbox
+
+                // checkbox = createInput(0, 1, 0);
+                // checkbox.attribute("type", "checkbox");
+                // checkbox.style("width", "15px");
+                // checkbox.style("height", "15px");
+
+                // button
+
+                speakbutton = createButton('Speak');
+                speakbutton.position(720, 120);
+                speakbutton.mousePressed(doSpeak);
+
+                //sliders
+
+                //vslider sets the volume
+                //rslider sets the rate
+                //pslider sets the pitch
+
+                vslider = createSlider(0., 100., 100.);
+                vslider.position(620, 160);
+                // vslider.color(20,40,96); //tried to change the color on the slider
+                vslider.mouseReleased(setVolume); //function setVolume
+                rslider = createSlider(10., 200., 100.);
+                rslider.position(620, 230);
+                rslider.mouseReleased(setRate); //function setRate
+                pslider = createSlider(1., 200., 100.);
+                pslider.position(620, 315);
+                pslider.mouseReleased(setPitch); //function setPitch
+
+                //labels
+
+                label = createDiv("Talk!");
+                label.position(728, 40);
+                // label = createDiv("interrupt?");
+                // label.position(125, 100);
+                label = createDiv("volume");
+                label.position(760, 150);
+                label = createDiv("rate");
+                label.position(760, 220);
+                label = createDiv("pitch");
+                label.position(760, 310);
+
+                myVoice.speak(input.value());
+
+
+
+            }
+
+            function setVolume() {
+
+                myVoice.setVolume(vslider.value()/100.);
+
+            }
+
+            function setRate() {
+
+                myVoice.setRate(rslider.value()/100.);
+
+            }
+
+            function setPitch() {
+
+                myVoice.setPitch(pslider.value()/100.);
+
+            }
+
+            function draw() {
+                
+                //might not need this function in order for the sketch to work
+
+            }
+
+            function doSpeak() {
+
+                // myVoice.interrupt = checkbox.elt.checked;
+                myVoice.speak(input.value()); //debugs for voice options
+
+            }
+
+
+        </script>
+
+
+    </body>
+</html>
