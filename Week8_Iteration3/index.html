@@ -1,0 +1,111 @@
+<!-- CODE BY MALCOLM DARKO -->
+<!-- Interactive Objects & Environment -->
+<!-- Fall 2021 -->
+
+
+<!-- REFERENCE ON CODING TRAIN TUTORIAL ON SIMPLE PARTICLE SYSTEM -->
+<!-- Link: https://www.youtube.com/watch?v=UcdigVaIYAk -->
+
+<!-- SOUND REFERENCE -->
+<!-- https://p5js.org/reference/#/p5.SoundFile -->
+
+
+<!-- MUSIC REFERENCE -->
+<!-- Link: https://www.youtube.com/watch?v=c0SuIMUoShI -->
+
+<!-- Only changed the song and the images in this sketch -->
+<!-- Based on the well known Nintendo gaming series; Super Mario Bros.  -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Week 8: Iteration 3 ~ Project 2: Assignment 3</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+        <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+         <script src="http://localhost:8080/ml5.js" type="text/javascript"></script>
+         <script src="p5.sound.js"></script>
+    </head>
+    <body>
+        <script>
+
+            //setting up particles variable
+
+            let particles = [];
+            let song;
+
+            let img1, img2;
+
+            function preload() {
+                song = loadSound('assets/Underworld.mp3');
+
+                img1 = loadImage('assets/gaming_portrait.png');
+                img2 = loadImage('assets/Underground.png');
+
+            }
+            
+            function setup() {
+                let cnv = createCanvas(800, 500);
+                cnv.mousePressed(canvasPressed);
+
+            }
+
+            function draw() {
+                background(img2);
+                let p = new Particle();
+                particles.push(p);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].show();
+                }
+
+            }
+
+            //creates particles
+
+            class Particle {
+                constructor() {
+                    this.x = 400;
+                    this.y = 480;
+                    this.vx = random(-1, 1);
+                    this.vy = random(-3, -1);
+                    this.alpha = 255;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.alpha -= 1;
+
+                }
+
+                //shows shape, object, or image
+
+                show() {
+                    // noStroke();
+                    // fill(random(255),random(255),random(255), this.alpha);
+                    // ellipse(this.x, this.y, 20);
+
+                    image(img1, this.x, this.y, 20, 20);
+                }
+
+
+
+            }
+
+            function canvasPressed() {
+                song.play();
+            }
+
+
+        </script>
+        
+        
+    </body>
+</html>
